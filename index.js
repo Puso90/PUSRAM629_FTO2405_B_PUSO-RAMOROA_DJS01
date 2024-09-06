@@ -17,24 +17,37 @@ const fbr = 0.5; // fuel burn rate (kg/s)
 //**New Velocity**: Approximately 48880 km/h after correction.
 //**New Distance**: Approximately 10000 km after correction.
 //**Remaining Fuel**: Approximately 3,200 kg after correction.
-
+function calcNewVel(vel, acc, time)  { 
+    
+   
+  return vel + (acc*time)*3600/1000
+}
 //CONVERTIONS:
-let velChange = vel / time; //changed velocity to seconds
+let velChange = vel*1000 / time; //changed velocity to seconds
+console.log(velChange)
 
+let timeByHour = time/3600;
 
-const d2 = d + (velChange*time) //calcultes new distance
+const d2 = d + (vel*timeByHour) //calcultes new distance
 console.log(`New Distance: ` + d2);
 
 const rf = fuel - (fbr*time) //calculates remaining fuel
 console.log(`fuel remaining: ` + rf)
 
+console.log(48880-(acc*time)*3600/1000)
+console.log(48880-velChange)
+
 const vel2 = calcNewVel(acc, velChange, time) //calculates new velocity based on acceleration
 
 // Pick up an error with how the function below is called and make it robust to such errors
-function calcNewVel(velChange, acc, time)  { 
-  return vel + (acc*time)
-}
+
 
 console.log(`Corrected New Velocity: ${vel2} km/h`);
 console.log(`Corrected New Distance: ${d2} km`);
 console.log(`Corrected Remaining Fuel: ${rf} kg`);
+
+
+/*
+//let velChange = vel*(1000/ time); //changed velocity to seconds
+//console.log(velChange) //2777.77777778
+*/
