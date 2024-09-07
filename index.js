@@ -6,48 +6,75 @@
  */
 
 // Given Parameters
-const vel = 10000; // velocity (km/h) to seconds
-const acc = 3; // acceleration (m/s^2)
+const velocity = 10000; // velocity (km/h) to seconds
+const acceleration = 3; // acceleration (m/s^2)
 const time = 3600; // seconds (1 hour)
-const d = 0; // distance (km)
+const distance = 0; // distance (km)
 const fuel = 5000; // remaining fuel (kg)
-const fbr = 0.5; // fuel burn rate (kg/s)
+const fuelBurnRate = 0.5; // fuel burn rate (kg/s)
 
 //SOLUTION:
 //**New Velocity**: Approximately 48880 km/h after correction.
 //**New Distance**: Approximately 10000 km after correction.
 //**Remaining Fuel**: Approximately 3,200 kg after correction.
-function calcNewVel(vel, acc, time)  { 
-    
-   
-  return vel + (acc*time)*3600/1000
-}
+
+
+
 //CONVERTIONS:
-let velChange = vel*1000 / time; //changed velocity to seconds
-console.log(velChange)
+const velocityChange = velocity*1000 / time; //changed velocity to seconds
+console.log(`vel change` + velocityChange)
 
-let timeByHour = time/3600;
+const timeByHour = time/3600;
 
-const d2 = d + (vel*timeByHour) //calcultes new distance
-console.log(`New Distance: ` + d2);
+const distance2 = distance + (velocityChange*time /1000) //calcultes new distance (velocity * time - in km)
+console.log(`New Distance: ` + distance2);
 
-const rf = fuel - (fbr*time) //calculates remaining fuel
-console.log(`fuel remaining: ` + rf)
+const remainingFuel = fuel - (fuelBurnRate*time) //calculates remaining fuel
+console.log(`fuel remaining: ` + remainingFuel)
 
-console.log(48880-(acc*time)*3600/1000)
-console.log(48880-velChange)
+console.log(48880-(acceleration*time)*3600/1000)
+console.log(48880-velocityChange)
 
-const vel2 = calcNewVel(acc, velChange, time) //calculates new velocity based on acceleration
+const newVelocity = calcNewVel(velocityChange, acceleration, time) //calculates new velocity based on acceleration
 
 // Pick up an error with how the function below is called and make it robust to such errors
+function calcNewVel(initialVelocity, acceleration, time)  { 
+    
+   
+  return initialVelocity + (acceleration*time);
+}
+
+const outputVelocity = newVelocity * 3600 / 1000;
+console.log(`Corrected New Velocity: ${outputVelocity} km/h`);  // BOOOOOM!!!!! Finally, there we go.
+console.log(`Corrected New Distance: ${distance2} km`);
+console.log(`Corrected Remaining Fuel: ${remainingFuel} kg`);
 
 
-console.log(`Corrected New Velocity: ${vel2} km/h`);
-console.log(`Corrected New Distance: ${d2} km`);
-console.log(`Corrected Remaining Fuel: ${rf} kg`);
 
 
+
+
+//_______________________________________________________________________________________________________________________________
 /*
-//let velChange = vel*(1000/ time); //changed velocity to seconds
-//console.log(velChange) //2777.77777778
+// TRIED:
+
+    //let velChange = vel*(1000/ time); //changed velocity to seconds
+    //console.log(velChange) //2777.77777778
+    
+//_______________________________________________________________________________________________________________________________
+
+// COMMENTS & NOTES:
+
+    1.  After many hours of working on it, unfortunately I succumbed to the tyrannical quick fix of chat gpt for more explanation
+        However, I allowed myself to struggles for many hours before.
+
+    2.  Confident, I can explain this.
+
+    3.  Tougher than I had expected - could have managed time better.  i.e. Never under estimate your opponent.
+
+
 */
+//________________________________________________________________________________________________________________________________
+
+
+
